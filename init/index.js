@@ -16,7 +16,6 @@ const initDB = async () =>{
     //Faltu ki entry delete kih jo phle se present thi
         
         await Listing.deleteMany({});
-        bcry
     // Lisitng naam ke model m data dala h
     
         await Listing.insertMany(initData.data);

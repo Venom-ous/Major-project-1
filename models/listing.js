@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
+const reviews = require("./reviews");
 const Schema = mongoose.Schema;
+const Review = requrie("./reviews.js")
+
 
 const listingSchema = new Schema({
     title: {
@@ -14,8 +17,20 @@ const listingSchema = new Schema({
     },
     price: Number,
     location: String,
-    country: String
+    country: String,
+    reviews: [
+        {
+        type: Schema.Types.ObjectId,
+        ref: "Reviews",
+    },]
 })
+
+listingSchema.post("findOneAndDelete", async(lising) =>{
+   if(listing){
+    await Review.deleteMany({_id: {$in: listing.reviews}});
+   }
+})
+
 // schema ka model bnaya h Listing naam ka
 
 const Listing = mongoose.model("Listing", listingSchema);
